@@ -5,11 +5,28 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     
-	<TextView  
+	<TextView 
+		android:id="@+id/titleMessage" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:text="@string/app_name"
+    	android:layout_margin="20sp"
+    	android:layout_centerHorizontal="true" />
+    	
+	<TextView
+		android:id="@+id/aboutMessage" 
     	android:layout_width="wrap_content" 
     	android:layout_height="wrap_content"
     	android:text="@string/camera_answer_about"
-    	android:layout_margin="20sp"
-    	android:layout_centerInParent="true" />
-
+    	android:layout_below="@id/aboutMessage"
+    	android:layout_margin="30sp" 
+    	android:layout_centerHorizontal="true" />
+    	
+    	
+    <CheckBox android:id="@+id/cameraAnswerCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/aboutMessage"
+        android:text="Enable Camera Button Call Answer" 
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
