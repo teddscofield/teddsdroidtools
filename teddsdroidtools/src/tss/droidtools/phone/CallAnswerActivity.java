@@ -28,8 +28,8 @@ public class CallAnswerActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		logMe("onCreate called");
 		super.onCreate(savedInstanceState);
+		logMe("onCreate called");
 		setContentView(R.layout.callanswerscreen);
 		Button returnToCallScreen = (Button) findViewById(R.id.returnToCallScreen);
 		returnToCallScreen.setOnClickListener(new OnClickListener() {
@@ -43,33 +43,50 @@ public class CallAnswerActivity extends Activity {
 	/** broadcast HEADSETHOOK when the camera button is pressed*/
 	@Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-		logMe("dispatchKeyEvent called with "+event);
+		//logMe("dispatchKeyEvent called with "+event);
+		
 		switch (event.getKeyCode()) {
 		case KeyEvent.KEYCODE_FOCUS:
-			// this event occurs when you press down lightly on the camera button
-			// e.g. auto focus.  The event happens a lot even when you press down
-			// hard (as the button is on its way down to the "hard press").
-			logMe("KEYCODE_FOCUS ignoring it");
-			return true;
-		case KeyEvent.KEYCODE_CAMERA:
-			logMe("KEYCODE_CAMERA");
+			/* this event occurs when you press down lightly on the camera button
+			 * e.g. auto focus.  The event happens a lot even when you press down
+			 * 
+			 * hard (as the button is on its way down to the "hard press").
+			 */
 			
+			//logMe("KEYCODE_FOCUS ignoring it");
+			
+			/* returning true to consume the event and prevent further processing of it by other apps */ 
+			return true;
+			
+		case KeyEvent.KEYCODE_CAMERA:
+			/*
+			 * The "magic" goes here.  
+			 * 
+			 * Programmatically mimic the press of the button on a head set used to answer
+			 * an incoming call.  The recipe to do this is as follows:
+			 * 
+			 *  intent - ACTION_MEDIA_BUTTON
+			 *  action - ACTION_DOWN
+			 *  code   - KEYCODE_HEADSETHOOK
+			 *  
+			 *  Broadcasting that intent answers the phone =)
+			 */
 			KeyEvent fakeHeadsetPress =	new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_HEADSETHOOK);
 			Intent fakeHeadsetIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
 			fakeHeadsetIntent.putExtra(Intent.EXTRA_KEY_EVENT, fakeHeadsetPress);
 
+			logMe("broadcasting ACTION_MEDIA_BUTTION intent with a KEYCODE_HEADSETHOOK code on an ACTION_DOWN action");
 			sendOrderedBroadcast(fakeHeadsetIntent, null);
 			
-			// not sure what this accomplishes here really...
-			logMe("moveTaskToBack(true) returns: "+moveTaskToBack(false));
-	  		
 			finish();
 	  		
 			return true;
+			
 		default:
 			logMe("Unknown key event: "+event);
 			break;
 		}
+		
 		return super.dispatchKeyEvent(event);
 	}
 	
