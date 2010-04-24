@@ -27,12 +27,14 @@ import android.widget.Button;
 public class CallAnswerActivity extends Activity {
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {	logMe("onCreate called");
+	protected void onCreate(Bundle savedInstanceState) {
+		logMe("onCreate called");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.callanswerscreen);
 		Button returnToCallScreen = (Button) findViewById(R.id.returnToCallScreen);
 		returnToCallScreen.setOnClickListener(new OnClickListener() {
-          	public void onClick(View v){					logMe("returnToCallScreen onClick event");
+          	public void onClick(View v){
+          		logMe("returnToCallScreen onClick event");
           		finish();
           	}
 		});
@@ -40,11 +42,17 @@ public class CallAnswerActivity extends Activity {
 	
 	/** broadcast HEADSETHOOK when the camera button is pressed*/
 	@Override
-    public boolean dispatchKeyEvent(KeyEvent event) {		logMe("dispatchKeyEvent called with "+event);
+    public boolean dispatchKeyEvent(KeyEvent event) {
+		logMe("dispatchKeyEvent called with "+event);
 		switch (event.getKeyCode()) {
-		case KeyEvent.KEYCODE_FOCUS:						logMe("KEYCODE_FOCUS ignoring it");
+		case KeyEvent.KEYCODE_FOCUS:
+			// this event occurs when you press down lightly on the camera button
+			// e.g. auto focus.  The event happens a lot even when you press down
+			// hard (as the button is on its way down to the "hard press").
+			logMe("KEYCODE_FOCUS ignoring it");
 			return true;
-		case KeyEvent.KEYCODE_CAMERA:						logMe("KEYCODE_CAMERA");
+		case KeyEvent.KEYCODE_CAMERA:
+			logMe("KEYCODE_CAMERA");
 			
 			KeyEvent fakeHeadsetPress =	new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_HEADSETHOOK);
 			Intent fakeHeadsetIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
@@ -53,18 +61,19 @@ public class CallAnswerActivity extends Activity {
 			sendOrderedBroadcast(fakeHeadsetIntent, null);
 			
 			// not sure what this accomplishes here really...
-			logMe("moveTaskToBack(true) returns: "+moveTaskToBack(true));
+			logMe("moveTaskToBack(true) returns: "+moveTaskToBack(false));
 	  		
 			finish();
 	  		
 			return true;
-		default: 											logMe("Unknown key event: "+event);
+		default:
+			logMe("Unknown key event: "+event);
 			break;
 		}
 		return super.dispatchKeyEvent(event);
 	}
 	
 	private void logMe(String s) {
-		if (Hc.DBG) Log.d(Hc.PRE_TAG + "CallAnswerActivity" + Hc.POST_TAG,Hc.LOG_FLUFF + s);
+		if (Hc.DBG) Log.d(Hc.LOG_TAG, Hc.PRE_TAG + "CallAnswerActivity" + Hc.POST_TAG + " "+ s);
 	}
 }

@@ -35,33 +35,39 @@ public class PhoneCallReceiver extends BroadcastReceiver {
 		
 		c = context;
 		SharedPreferences p = c.getSharedPreferences(Hc.PREFSNAME,0);
+		logMe(" is the pref even there?"+p.contains(Hc.PREFSNAME));
 		
-		if (!p.getBoolean("enabled", false)) {				logMe("feature disabled.");
+		if (!p.getBoolean(Hc.PREF_ENABLED_KEY, false)) {
+			logMe("feature disabled. ");
 			return;
 		} 
-		else												logMe("feature enabled, checking call state");
+		else
+			logMe("feature enabled, checking call state");
 
 		String phone_state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
 		
 		if (phone_state.equals(TelephonyManager.EXTRA_STATE_RINGING)) 
-		{													logMe("EXTRA_STATE_RINGING phone state received, scheduling delayed creation of the CallAnswerActivity creation task.");
+		{
+			logMe("EXTRA_STATE_RINGING phone state received, scheduling delayed creation of the CallAnswerActivity creation task.");
 			sh = new Handler();
 			sh.postDelayed(t, Hc.STARTUP_DELAY);
 		}
-		else												logMe("unknown phone state received: "+phone_state);
+		else
+			logMe("unknown phone state received: "+phone_state);
 
 	}
 	
 	class CreateCallAnswerActivityTask implements Runnable {
 
 		@Override
-		public void run() {									logMe("CreateCallAnswerActivityTask#run call back called");
+		public void run() {
+			logMe("CreateCallAnswerActivityTask#run call back called");
 
 			Intent callAnswerActivity = new Intent();
     		callAnswerActivity.setClassName("tss.droidtools.phone","tss.droidtools.phone.CallAnswerActivity");
     		callAnswerActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
     		
-    														logMe("starting CallAnswerActivity");
+    		logMe("starting CallAnswerActivity");
         	c.startActivity(callAnswerActivity);
         	sh.removeCallbacks(t);
         	sh = null;
@@ -69,6 +75,6 @@ public class PhoneCallReceiver extends BroadcastReceiver {
 	}
 	
 	private void logMe(String s) {
-		if (Hc.DBG) Log.d(Hc.PRE_TAG + "PhoneCallReceiver" + Hc.POST_TAG,Hc.LOG_FLUFF + s);
+		if (Hc.DBG) Log.d(Hc.LOG_TAG, Hc.PRE_TAG + "PhoneCallReceiver" + Hc.POST_TAG + " "+ s);
 	}
 }
