@@ -23,10 +23,64 @@
     	android:layout_centerHorizontal="true" />
     	
     	
-    <CheckBox android:id="@+id/cameraAnswerCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/aboutMessage"
-        android:text="Enable Camera Button Call Answer" 
-        android:layout_centerHorizontal="true" />
+    	
+    	
+	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:stretchColumns="1"
+	    android:layout_below="@id/aboutMessage">
+
+	    <View
+	        android:layout_height="1dip"
+	        android:background="#FF909090" />
+	        	
+	    <TableRow>
+	        <TextView
+	            android:layout_column="1"
+	            android:text="Answer Calls With Camera Button"
+	            android:padding="3dip" />
+	            
+	        <CheckBox android:id="@+id/cameraAnswerCheckBox"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"/>
+	    </TableRow>
+<!--
+	    <View
+	        android:layout_height="1dip"
+	        android:background="#FF909090" />
+	        	    	    
+		<TableRow>
+	        <TextView
+	            android:layout_column="1"
+	            android:text="Answer Calls With The Camera Button"
+	            android:padding="3dip" />
+	            
+	        <CheckBox android:id="@+id/cameraAnswerCheckBox"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"/>
+	    </TableRow>
+	    
+	    <View
+	        android:layout_height="1dip"
+	        android:background="#FF909090" />
+
+	    <TableRow>
+	        <TextView
+	            android:layout_column="1"
+	            android:text="Enable In-Call Screen Guard"
+	            android:padding="3dip" />
+	            
+	        <CheckBox android:id="@+id/darkScreenCheckBox"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"/>
+	    </TableRow>
+ -->
+	    <View
+	        android:layout_height="1dip"
+	        android:background="#FF909090" />
+
+	</TableLayout>
+		   	
+
 </RelativeLayout>

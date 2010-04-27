@@ -18,8 +18,9 @@
     		android:layout_centerHorizontal="true"
     		android:layout_marginBottom="90px"
     		android:textColor="#FFAA00"
-    		android:typeface="monospace"
-    		android:textSize="20sp"
+    		android:background="#000000"
+       		android:typeface="monospace"
+    		android:textSize="14sp"
     		android:textStyle="bold" />
  
     	<TextView 
@@ -37,7 +38,7 @@
 			android:layout_height="wrap_content"
 			android:text="@string/answer_msg3"
 			android:layout_below="@id/msg2"
-			android:layout_centerHorizontal="true" />
+			android:layout_centerHorizontal="true"/>
 			
 	</RelativeLayout>
 </RelativeLayout>

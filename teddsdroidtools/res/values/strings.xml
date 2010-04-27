@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Tedd\'s Droid Tools</string>
-	<string name="camera_answer_about">Camera Answer - You can now answer phone calls with the camera button.</string>
+	<string name="camera_answer_about">Phone Tools</string>
     <string name="answer_msg1">Push Camera Key To Answer</string>
     <string name="answer_msg2"> ... Or  ...</string>
 	<string name="answer_msg3">Return To Regular Call Screen</string>
