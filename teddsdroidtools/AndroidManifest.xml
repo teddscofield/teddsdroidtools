@@ -2,8 +2,8 @@
 <manifest 
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	package="tss.droidtools.phone"
-	android:versionCode="1"
-	android:versionName="0.1-beta1">
+	android:versionCode="6"
+	android:versionName="0.1-beta4.1">
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
 
@@ -25,15 +25,31 @@
 			android:taskAffinity=""
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"
 			android:screenOrientation="portrait" />
+			
+		<activity
+			android:name=".InCallScreenGuardActivity"
+			android:label="Tedd\'s In-Call Screen Guard"
+			android:excludeFromRecents="true"
+			android:launchMode="standard"
+			android:taskAffinity=""
+			android:screenOrientation="portrait">
+		</activity>
 
 		<receiver android:name=".PhoneCallReceiver" android:enabled="true">
 			<intent-filter>
 				<action android:name="android.intent.action.PHONE_STATE" />
 			</intent-filter>
 		</receiver>
-		
+		<service android:name="CallAnswerIntentService" />
+		<service android:name="InCallScreenGuardService" />
 	</application>
 	
+	<!--  
+		use of the TelephonyManager extra state constants in the broadcast intent passed 
+		to the receiver require min sdk leve 3.
+	-->
 	<uses-sdk android:minSdkVersion="3" />
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+	<uses-permission android:name="android.permission.CALL_PHONE" />
 </manifest> 

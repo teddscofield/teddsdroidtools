@@ -2,7 +2,10 @@
 <resources>
     <string name="app_name">Tedd\'s Droid Tools</string>
 	<string name="camera_answer_about">Phone Tools</string>
-    <string name="answer_msg1">Push Camera Key To Answer</string>
+    <string name="answer_msg1">Tedd\'s Answer Call Tool</string>
     <string name="answer_msg2"> ... Or  ...</string>
 	<string name="answer_msg3">Return To Regular Call Screen</string>
+	<string name="answer_msg4">Long Press To Answer</string>
+	<string name="answer_msg5">Long Press To Obliterate Call</string>
+	<string name="screen_guard_msg1">Tedd\'s In-Call Screen Guard</string>
 </resources>

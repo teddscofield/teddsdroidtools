@@ -1,7 +1,6 @@
 package tss.droidtools.phone;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
+import tss.droidtools.BaseActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,40 +11,70 @@ import android.widget.Toast;
  * @author tedd
  *
  */
-public class ConfigScreenActivity extends Activity {
+public class ConfigScreenActivity extends BaseActivity {
 
-	private SharedPreferences p;
-	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        
-        p = this.getSharedPreferences(Hc.PREFSNAME, 0);
-        if (!p.contains(Hc.PREF_ENABLED_KEY))
-        	p.edit().putBoolean(Hc.PREF_ENABLED_KEY, false).commit();
 
-        Boolean enabled = p.getBoolean(Hc.PREF_ENABLED_KEY, false);
-        final CheckBox checkbox = (CheckBox) findViewById(R.id.cameraAnswerCheckBox);
-        checkbox.setChecked(enabled);
+        renderConfigCheckbox(Hc.PREF_PHONE_TOOLS_KEY,true,R.id.phoneToolsCheckBox,"ALL Phone Tools have been");
+        renderConfigCheckbox(Hc.PREF_CALL_ANSWER_TOOLS_KEY,true,R.id.callAnswerTools,"Call Answer Tools");
+        renderConfigCheckbox(Hc.PREF_ANSWER_WITH_CAMERA_KEY,true,R.id.cameraAnswerCheckBox,"Camera Button Answer");
+        renderConfigCheckbox(Hc.PREF_ANSWER_WITH_TRACKBALL_KEY,true,R.id.trackballAnswerCheckBox,"Trackball Answer");
+        renderConfigCheckbox(Hc.PREF_ANSWER_WITH_BUTTON_KEY,true,R.id.touchscreenButtonAnswerCheckBox,"Touchscreen Button Answer");
+        renderConfigCheckbox(Hc.PREF_ALLOW_REJECT_KEY,true,R.id.rejectCallsCheckBox,"Reject Call Feature");
+        renderConfigCheckbox(Hc.PREF_SCREEN_GUARD_TOOLS_KEY,true,R.id.inCallScreenGuardCheckBox,"In-Call Screen Guard");
+        renderConfigCheckbox(Hc.PREF_DEBUG_LOGGING_KEY,true,R.id.debugLoggingCheckBox,"Debug Logging");
         
-        checkbox.setOnClickListener(new OnClickListener() {
+    }
+    
+    private void renderConfigCheckbox(String key,boolean defaultVal,int viewId, String toastMsg) {
+    	// set the default if it didn't exist
+        if (!p.contains(key))
+        	p.edit().putBoolean(key, defaultVal).commit();
+
+        // get the current setting
+        Boolean currentSetting = p.getBoolean(key, defaultVal);
+        
+        // get the view component
+        final CheckBox checkbox = (CheckBox) findViewById(viewId);
+        
+        // set the current setting
+        checkbox.setChecked(currentSetting);
+        
+        // register the onClick call back
+        checkbox.setOnClickListener(new CustomOnClickListener(key,toastMsg) {
             public void onClick(View v) {
-            	
-                // Perform action on clicks, depending on whether it's now checked
-                if (((CheckBox) v).isChecked()) {
-                	p.edit().putBoolean(Hc.PREF_ENABLED_KEY, true).commit();
-                    Toast.makeText(ConfigScreenActivity.this, "Feature Enabled", Toast.LENGTH_SHORT).show();
-                } else {
-                	p.edit().putBoolean(Hc.PREF_ENABLED_KEY, false).commit();
-                    Toast.makeText(ConfigScreenActivity.this, "Feature Disabled", Toast.LENGTH_SHORT).show();
+                if (((CheckBox) v).isChecked()) 
+                {
+                	p.edit().putBoolean(key, true).commit();
+                    Toast.makeText(ConfigScreenActivity.this, toastMsg + " Enabled", Toast.LENGTH_SHORT).show();
+                } 
+                else 
+                {
+                	p.edit().putBoolean(key, false).commit();
+                    Toast.makeText(ConfigScreenActivity.this, toastMsg + " Disabled", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });  
     }
-//	private void logMe(String s) {
-//		if (Hc.DBG) Log.d(Hc.LOG_TAG, Hc.PRE_TAG + "ConfigScreenActivity" + Hc.POST_TAG + " "+ s);
-//	}
+    
+    private class CustomOnClickListener implements OnClickListener {
+
+    	protected String key;
+    	protected String toastMsg;
+    	public CustomOnClickListener(String key,String toastMsg) {
+    		this.key = key; 
+    		this.toastMsg = toastMsg;
+    	}
+		@Override
+		public void onClick(View v) {
+			throw new UnsupportedOperationException();
+			
+		}
+    	
+    }
 }

@@ -3,42 +3,54 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    
+    android:layout_height="200sp"
+    android:layout_gravity="bottom">
+s
+   	<TextView 
+   		android:id="@+id/msg1"
+		android:layout_width="wrap_content" 
+   		android:layout_height="wrap_content"
+   		android:text="@string/answer_msg1"
+   		android:layout_alignParentTop="true"
+   		android:layout_centerHorizontal="true"
+   		android:textColor="#FFAA00"
+   		android:background="#000000"
+      	android:typeface="monospace"
+   		android:textSize="14sp"
+   		android:textStyle="bold"
+   		/>
+
     <RelativeLayout
+    	android:id="@+id/buttonContainer"
+    	android:layout_below="@id/msg1"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:layout_centerInParent="true">
-   	
-    	<TextView 
-			android:layout_width="wrap_content" 
-    		android:layout_height="wrap_content"
-    		android:id="@+id/msg1"
-    		android:text="@string/answer_msg1"
-    		android:layout_centerHorizontal="true"
-    		android:layout_marginBottom="90px"
-    		android:textColor="#FFAA00"
-    		android:background="#000000"
-       		android:typeface="monospace"
-    		android:textSize="14sp"
-    		android:textStyle="bold" />
- 
-    	<TextView 
-			android:id="@+id/msg2" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" 
-			android:text="@string/answer_msg2" 
-			android:layout_below="@id/msg1"
-			android:layout_centerHorizontal="true"
-			android:layout_marginBottom="90px" />    		
+    	android:layout_alignParentBottom="true"
+    	android:layout_marginBottom="20sp">
 
+		<Button 
+			android:id="@+id/answerCallButton"
+			android:layout_width="100sp" 
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:text="Answer"
+			android:layout_marginLeft="5sp"
+			/>
+			
     	<Button 
 			android:id="@+id/returnToCallScreen"
-			android:layout_width="wrap_content" 
+			android:layout_width="70sp" 
 			android:layout_height="wrap_content"
-			android:text="@string/answer_msg3"
-			android:layout_below="@id/msg2"
-			android:layout_centerHorizontal="true"/>
-			
+			android:layout_centerHorizontal="true"
+			android:text="Exit"
+			/>
+
+		<Button	 
+			android:id="@+id/rejectCallButton"
+			android:layout_width="100sp" 
+			android:layout_height="wrap_content"
+			android:text="Ignore"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="5sp"/>
 	</RelativeLayout>
 </RelativeLayout>
