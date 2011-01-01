@@ -13,7 +13,6 @@ import android.os.RemoteException;
 import com.android.internal.telephony.ITelephony;
 import android.telephony.TelephonyManager;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -133,20 +132,6 @@ public class CallAnswerActivity extends BaseActivity {
 	// Input event handler call backs
 	// ------------------------------------------------------------------------
 	
-	/** 
-	 * Track ball press event handler that will answer a call 
-	 */
-	@Override public boolean onTrackballEvent(MotionEvent event) {
-
-		switch(event.getAction())
-		{
-		case MotionEvent.ACTION_MOVE: return true;
-		case MotionEvent.ACTION_DOWN: answerCall(); return true;
-		default: debugLog("trackball event: "+event);
-		}
-		return super.dispatchTrackballEvent(event);
-	}
-	
 	/**
 	 * Camera button press event handler that will answer a call
 	 */
@@ -156,7 +141,7 @@ public class CallAnswerActivity extends BaseActivity {
 		{
 		case KeyEvent.KEYCODE_FOCUS: return true;
 		case KeyEvent.KEYCODE_CAMERA: answerCall(); return true;
-		default: debugLog("Unknown key event: "+event);
+		case KeyEvent.KEYCODE_DPAD_CENTER: answerCall(); return true;		
 		}
 		return super.dispatchKeyEvent(event);
 	}

@@ -159,7 +159,7 @@
 		<TableRow>
 	        <TextView
 	            android:layout_column="1"
-	            android:text="Answer Call With Track Ball Press"
+	            android:text="Answer With Trackball/D-Pad Press"
 	            android:padding="3dip" 
 				android:layout_height="wrap_content" 
 				android:layout_width="wrap_content"/>
@@ -174,7 +174,7 @@
 	            android:padding="3dip"
 				android:layout_height="wrap_content" 
 				android:layout_width="wrap_content"
-				android:text="Enabling this will allow you to answer incoming calls by pressing down on the track ball."				
+				android:text="Enabling this will allow you to answer incoming calls by pressing down on the trackball or the center of the direction pad."				
 				/>
 		</TableRow>
 
