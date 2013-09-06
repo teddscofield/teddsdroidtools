@@ -12,3 +12,7 @@ The answer feature was nerfed by Google in Android 2.3.  The permission required
 6/14/2013 UPDATE: I did some reading around the other day and saw reports that the permission nerf only applied to the call that silences the ringer, not to the call that answers or ends the call.  I may one day pick this back up and try it out but if anyone tinkering with this code wants to give it a try I would be most interested in hearing about what you find.  Does it work?  Does the ringer stop when you answer an incoming call?
 
 The screen guard feature is still helpful to some folks and I may fork the project off to a screen guard only app.
+
+9/5/2013 UPDATE: sallespromanager was cool enough to test on Android 4.1.2 and found the internal services do not work. See https://github.com/teddscofield/teddsdroidtools/issues/2 Security exceptions are thrown.  Was fun while it lasted but that appears to be the end of the answer tools.
+
+
